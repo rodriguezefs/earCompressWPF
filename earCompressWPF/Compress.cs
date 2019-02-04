@@ -15,8 +15,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace earCompressWPF {
+
+    public delegate void GetListProgress();
     public static class Compress {
 
+        public static event GetListProgress _getListProgress;  //https://www.dotnetperls.com/event
         public static async Task<List<InfoArchivo>> GetListFiles(string nombreArchivo) {
             List<InfoArchivo> lxLstInfoArchivo = new List<InfoArchivo>();      
 
