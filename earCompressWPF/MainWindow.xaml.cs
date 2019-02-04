@@ -26,12 +26,11 @@ namespace earCompressWPF {
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e) {
+        private async void AbrirArchivo_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog lxOFDlg = new OpenFileDialog();
 
             lxOFDlg.InitialDirectory = "C:\\";
-            lxOFDlg.Filter = "Archivos rar (*.rar)|*.rar|Archivos zip (*.zip)|*.zip|Archivos 7zip (*.7z)|*.7z|Todos (*.*)|*.*";
-
+            lxOFDlg.Filter = "Todos (*.*)|*.*|Archivos rar (*.rar)|*.rar|Archivos zip (*.zip)|*.zip|Archivos 7zip (*.7z)|*.7z";
 
             if (lxOFDlg.ShowDialog() == true) {
                 lstListadeArchivos.DataContext = null;
@@ -47,6 +46,7 @@ namespace earCompressWPF {
                     case ".rar":
                     case ".tar":
                     case ".zip":
+                        StatusSet($"Abriendo {txtNombreArchivo.Text}...");
                         var lst = await Compress.GetListFiles(txtNombreArchivo.Text);
                         lstListadeArchivos.DataContext = lst;
                         break;
@@ -54,25 +54,7 @@ namespace earCompressWPF {
                         break;
                 }
             }
-        }
-
-        private void cmdExtraerTodos_Click(object sender, RoutedEventArgs e) {
-            Compress.ExtraerTodo(txtNombreArchivo.Text,txtRutaDestino.Text);
-        }
-
-        private void cmdExtraerSeleccionados_Click(object sender, RoutedEventArgs e) {
-
-            List<string> lst = new List<string>();
-            foreach(InfoArchivo lxItm in lstListadeArchivos.SelectedItems) {
-                lst.Add(lxItm.Nombre);
-            }
-
-            Compress.ExtraerArchivosSeleccionados(txtNombreArchivo.Text, txtRutaDestino.Text, lst);
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            txtRutaDestino.Text = path;
+            StatusSet();
         }
 
         private void cmdDestino_Click(object sender, RoutedEventArgs e) {
@@ -81,10 +63,32 @@ namespace earCompressWPF {
                 Title = "Seleccionar carpeta destino",
                 ShowPlacesList = true
             };
-            
+
             if (fd.ShowDialog() == true) {
                 txtRutaDestino.Text = fd.FileName;
             }
+        }
+
+        private void cmdExtraerSeleccionados_Click(object sender, RoutedEventArgs e) {
+
+            List<string> lst = new List<string>();
+            foreach (InfoArchivo lxItm in lstListadeArchivos.SelectedItems) {
+                lst.Add(lxItm.Nombre);
+            }
+
+            Compress.ExtraerArchivosSeleccionados(txtNombreArchivo.Text, txtRutaDestino.Text, lst);
+        }
+
+        private void cmdExtraerTodos_Click(object sender, RoutedEventArgs e) {
+            Compress.ExtraerTodo(txtNombreArchivo.Text,txtRutaDestino.Text);
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            txtRutaDestino.Text = path;
+        }
+
+        private void StatusSet(string Msg = "") {
+            stText.Text = Msg;
         }
     }
 }

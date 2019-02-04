@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Compress.cs" />
     <Compile Include="Extentions.cs" />
+    <Compile Include="Icons.cs" />
     <Compile Include="InfoArchivo.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

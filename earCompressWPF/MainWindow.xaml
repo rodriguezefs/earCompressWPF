@@ -30,7 +30,7 @@
                 <Button x:Name="cmdAbrir" 
                         Grid.Column="3" 
                         Style="{StaticResource ButtonStyle}"
-                Click="Button_Click">_Abrir</Button>
+                Click="AbrirArchivo_Click">_Abrir</Button>
             </Grid>
         </Border>
 
@@ -61,7 +61,7 @@
                     </GridViewColumn>
                     <GridViewColumn Header="Carpeta"
                                     Width="Auto"
-                                    />
+                                    DisplayMemberBinding="{Binding Carpeta}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -105,7 +105,11 @@
             </Grid>
         </Border>
 
-        <StatusBar x:Name="st" Grid.Row="3"></StatusBar>
+        <StatusBar x:Name="st" Grid.Row="3">
+            <StatusBarItem>
+            <TextBlock x:Name="stText"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
 

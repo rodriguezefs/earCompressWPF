@@ -7,6 +7,7 @@ using SharpCompress.Archives.Zip;
 using SharpCompress.Common;
 using SharpCompress.Readers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace earCompressWPF {
     public static class Compress {
 
         public static async Task<List<InfoArchivo>> GetListFiles(string nombreArchivo) {
-            List<InfoArchivo> lxLstInfoArchivo = new List<InfoArchivo>();
+            List<InfoArchivo> lxLstInfoArchivo = new List<InfoArchivo>();      
 
             using (Stream stream = File.OpenRead(nombreArchivo)) {
                 var reader = ReaderFactory.Open(stream);
