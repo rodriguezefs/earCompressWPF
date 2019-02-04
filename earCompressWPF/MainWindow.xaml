@@ -6,43 +6,38 @@
         xmlns:local="clr-namespace:earCompressWPF"
         mc:Ignorable="d"
         Title="ear Compress" Height="450" Width="800" Loaded="Window_Loaded">
-    <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="FontSize" Value="14"></Setter>
-        </Style>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="16"></Setter>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"></Setter>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="FontSize" Value="16"></Setter>
-        </Style>
-        <Style TargetType="{x:Type Border}">
-            <Setter Property="CornerRadius" Value="3"/>
-        </Style>
-    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="55"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="115"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="75"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        <Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" VerticalAlignment="Center">Archivo</Label>
+                <TextBox x:Name="txtNombreArchivo" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="2" 
+                         Style="{StaticResource TextBoxStyle}"/>
+                <Button x:Name="cmdAbrir" 
+                        Grid.Column="3" 
+                        Style="{StaticResource ButtonStyle}"
+                Click="Button_Click">_Abrir</Button>
+            </Grid>
+        </Border>
 
-        <Label Grid.Column="0" VerticalAlignment="Center">Archivo</Label>
-        <TextBox x:Name="txtNombreArchivo" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="2"></TextBox>
-        <Button x:Name="cmdAbrir" Grid.Column="3" Grid.Row="0" Margin="2" Click="Button_Click">_Abrir</Button>
-
-        <ListView x:Name ="lstListadeArchivos" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Margin="2" ItemsSource="{Binding}">
+        <ListView x:Name ="lstListadeArchivos" 
+                  Grid.Row="1"
+                  MinHeight="100" 
+                  Margin="2" ItemsSource="{Binding}">
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -53,19 +48,69 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nombre" Width="Auto" 
+                    <GridViewColumn Header="Nombre" 
+                                    Width="Auto" 
                                     DisplayMemberBinding="{Binding Nombre}"/>
-                    <GridViewColumn Header="Tamaño" Width="100" >
+                    <GridViewColumn Header="Tamaño" 
+                                    Width="100" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Right" Text="{Binding Tamaño}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Header="Carpeta"
+                                    Width="Auto"
+                                    />
                 </GridView>
             </ListView.View>
-            
-            <!--<ListView.ItemTemplate>
+        </ListView>
+
+        <Border Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center">Destino</Label>
+                <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=TextBoxStyle}"/>
+                <Button x:Name="cmdSelDestino" 
+                        Grid.Column="3" 
+                        Style="{StaticResource ButtonStyle}"
+                        Click="cmdDestino_Click">_Destino</Button>
+                <StackPanel Grid.Row="1" 
+                            Grid.ColumnSpan="4" 
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Button x:Name="cmdExtraerSeleccionados" 
+                            Style="{StaticResource ButtonStyle}"
+                            Click="cmdExtraerSeleccionados_Click">
+                        <TextBlock TextAlignment="Center">Extraer<LineBreak/>Seleccionados</TextBlock>
+                    </Button>
+                    <Button x:Name="cmdExtraerTodos" 
+                            Style="{StaticResource ButtonStyle}"
+                            Click="cmdExtraerTodos_Click">
+                        <TextBlock>
+                            Extraer<LineBreak/>Todos
+                        </TextBlock>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <StatusBar x:Name="st" Grid.Row="3"></StatusBar>
+    </Grid>
+</Window>
+
+
+<!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -77,16 +122,3 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>-->
-        </ListView>
-
-        <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">Destino</Label>
-        <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="2"></TextBox>
-        <Button x:Name="cmdSelDestino" Grid.Column="3" Grid.Row="2" Margin="2" Click="cmdDestino_Click">_Destino</Button>
-        
-        <Button x:Name="cmdExtraerSeleccionados" Grid.Row="3" Grid.Column="2" Margin="2" Click="cmdExtraerSeleccionados_Click">
-            <TextBlock TextAlignment="Center">Extraer<LineBreak/>Seleccionados</TextBlock>
-        </Button>
-        <Button x:Name="cmdExtraerTodos" Grid.Row="3" Grid.Column="3" Margin="2" Click="cmdExtraerTodos_Click">Extraer _Todos</Button>
-        <StatusBar Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4"></StatusBar>
-    </Grid>
-</Window>
