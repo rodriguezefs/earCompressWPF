@@ -81,9 +81,12 @@
         </materialDesign:Card>
         
         <Border Grid.Row="2">
+            <materialDesign:Card 
+                Margin="10"
+                Padding="5">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="35"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -93,7 +96,8 @@
                     <ColumnDefinition Width="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label VerticalAlignment="Center">Destino</Label>
-                <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=TextBoxStyle}"/>
+                <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" 
+                         Style="{StaticResource MaterialDesignTextBox}"/>
                 <Button x:Name="cmdSelDestino" 
                         Grid.Column="3" 
                         Style="{DynamicResource MaterialDesignFlatButton}"
@@ -101,6 +105,7 @@
                 <StackPanel Grid.Row="1" 
                             Grid.ColumnSpan="4" 
                             Orientation="Horizontal"
+                            Margin="10"
                             HorizontalAlignment="Right">
                     <Button x:Name="cmdExtraerSeleccionados" 
                             Style="{DynamicResource MaterialDesignFlatButton}"
@@ -117,6 +122,7 @@
 
                 </StackPanel>
             </Grid>
+            </materialDesign:Card>
         </Border>
 
         <StatusBar x:Name="st" Grid.Row="3">

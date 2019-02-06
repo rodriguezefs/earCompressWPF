@@ -35,6 +35,7 @@
 
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="14"></Setter>
+                <Setter Property="Margin" Value="10"/>
             </Style>
 
             <Style TargetType="Label">
