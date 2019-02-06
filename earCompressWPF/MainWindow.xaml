@@ -5,11 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:earCompressWPF"
         mc:Ignorable="d"
-        Title="ear Compress" Height="450" Width="800" Loaded="Window_Loaded">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="earCompress" Height="450" Width="800" Loaded="Window_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="115"/>
             <RowDefinition Height="30"/>
@@ -26,18 +34,23 @@
                 <TextBox x:Name="txtNombreArchivo" 
                          Grid.Column="1" 
                          Grid.ColumnSpan="2" 
-                         Style="{StaticResource TextBoxStyle}"/>
+                         Style="{StaticResource MaterialDesignTextBox}"/>
                 <Button x:Name="cmdAbrir" 
                         Grid.Column="3" 
-                        Style="{StaticResource ButtonStyle}"
+                        Margin="4"
+                        Style="{DynamicResource MaterialDesignFlatButton}"
                 Click="AbrirArchivo_Click">_Abrir</Button>
             </Grid>
         </Border>
 
-        <ListView x:Name ="lstListadeArchivos" 
-                  Grid.Row="1"
-                  MinHeight="100" 
+        <materialDesign:Card 
+            Padding="10" 
+            Margin="10"
+            Grid.Row="1">
+            <ListView x:Name ="lstListadeArchivos" 
+                  MinHeight="200"
                   Margin="2" ItemsSource="{Binding}">
+            
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -65,11 +78,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
+        </materialDesign:Card>
+        
         <Border Grid.Row="2">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="45"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -82,22 +96,22 @@
                 <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=TextBoxStyle}"/>
                 <Button x:Name="cmdSelDestino" 
                         Grid.Column="3" 
-                        Style="{StaticResource ButtonStyle}"
+                        Style="{DynamicResource MaterialDesignFlatButton}"
                         Click="cmdDestino_Click">_Destino</Button>
                 <StackPanel Grid.Row="1" 
                             Grid.ColumnSpan="4" 
                             Orientation="Horizontal"
                             HorizontalAlignment="Right">
                     <Button x:Name="cmdExtraerSeleccionados" 
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
                             Click="cmdExtraerSeleccionados_Click">
-                        <TextBlock TextAlignment="Center">Extraer<LineBreak/>Seleccionados</TextBlock>
+                        <TextBlock TextAlignment="Center">Extraer Seleccionados</TextBlock>
                     </Button>
                     <Button x:Name="cmdExtraerTodos" 
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
                             Click="cmdExtraerTodos_Click">
                         <TextBlock>
-                            Extraer<LineBreak/>Todos
+                            Extraer Todos
                         </TextBlock>
                     </Button>
 
