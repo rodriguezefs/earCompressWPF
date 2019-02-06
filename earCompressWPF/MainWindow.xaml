@@ -5,24 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:earCompressWPF"
         mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        fw:AcrylicWindow.Enabled="True"
         Title="earCompress" Height="450" Width="800" Loaded="Window_Loaded">
 
-    <Grid>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="58*"/>
+            <ColumnDefinition Width="66*"/>
+            <ColumnDefinition Width="659*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="115"/>
+            <RowDefinition Height="155"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Border>
+        
+        <Border Grid.ColumnSpan="4"
+                Margin="10"
+                Background="{Binding Path=(fw:AccentColors.ImmersiveSystemAccentLight1Brush)}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="75"/>
@@ -34,100 +37,102 @@
                 <TextBox x:Name="txtNombreArchivo" 
                          Grid.Column="1" 
                          Grid.ColumnSpan="2" 
-                         Style="{StaticResource MaterialDesignTextBox}"/>
+                         Style="{StaticResource TextBoxStyle}"/>
                 <Button x:Name="cmdAbrir" 
                         Grid.Column="3" 
                         Margin="4"
-                        Style="{DynamicResource MaterialDesignFlatButton}"
-                Click="AbrirArchivo_Click">_Abrir</Button>
+                        Style="{StaticResource ButtonRevealStyle}"
+                        Click="AbrirArchivo_Click">_Abrir</Button>
             </Grid>
         </Border>
 
-        <materialDesign:Card 
+        <Border 
             Padding="10" 
-            Margin="10"
-            Grid.Row="1">
+            Margin="0.5,10,10,10"
+            Background="{Binding Path=(fw:AccentColors.ImmersiveSystemAccentLight1Brush)}"
+            Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1">
             <ListView x:Name ="lstListadeArchivos" 
                   MinHeight="200"
                   Margin="2" ItemsSource="{Binding}">
-            
-            <ListView.Resources>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-                <Style TargetType="{x:Type GridViewColumnHeader}">
-                    <Setter Property="HorizontalContentAlignment" Value="Left" />
-                </Style>
-            </ListView.Resources>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Nombre" 
+
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nombre" 
                                     Width="Auto" 
                                     DisplayMemberBinding="{Binding Nombre}"/>
-                    <GridViewColumn Header="Tamaño" 
+                        <GridViewColumn Header="Tamaño" 
                                     Width="100" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Right" Text="{Binding Tamaño}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Carpeta"
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Tamaño}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Carpeta"
                                     Width="Auto"
                                     DisplayMemberBinding="{Binding Carpeta}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        </materialDesign:Card>
-        
-        <Border Grid.Row="2">
-            <materialDesign:Card 
-                Margin="10"
-                Padding="5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="75"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label VerticalAlignment="Center">Destino</Label>
-                <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" 
-                         Style="{StaticResource MaterialDesignTextBox}"/>
-                <Button x:Name="cmdSelDestino" 
-                        Grid.Column="3" 
-                        Style="{DynamicResource MaterialDesignFlatButton}"
-                        Click="cmdDestino_Click">_Destino</Button>
-                <StackPanel Grid.Row="1" 
-                            Grid.ColumnSpan="4" 
-                            Orientation="Horizontal"
-                            Margin="10"
-                            HorizontalAlignment="Right">
-                    <Button x:Name="cmdExtraerSeleccionados" 
-                            Style="{DynamicResource MaterialDesignFlatButton}"
-                            Click="cmdExtraerSeleccionados_Click">
-                        <TextBlock TextAlignment="Center">Extraer Seleccionados</TextBlock>
-                    </Button>
-                    <Button x:Name="cmdExtraerTodos" 
-                            Style="{DynamicResource MaterialDesignFlatButton}"
-                            Click="cmdExtraerTodos_Click">
-                        <TextBlock>
-                            Extraer Todos
-                        </TextBlock>
-                    </Button>
-
-                </StackPanel>
-            </Grid>
-            </materialDesign:Card>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Border>
 
-        <StatusBar x:Name="st" Grid.Row="3">
+        <Border Grid.Row="2" Grid.ColumnSpan="4"
+                Background="{Binding Path=(fw:AccentColors.ImmersiveSystemAccentLight1Brush)}"
+                Margin="10"
+                Padding="5">
+            <Border>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalAlignment="Center">Destino</Label>
+                    <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" 
+                         Style="{StaticResource TextBoxStyle}"/>
+                    <Button x:Name="cmdSelDestino" 
+                        Grid.Column="3" 
+                        Style="{StaticResource ButtonRevealStyle}"
+                        Click="cmdDestino_Click">_Destino</Button>
+                    <StackPanel Grid.Row="1" 
+                            Grid.ColumnSpan="4" 
+                            Orientation="Horizontal"
+                            Margin="5"
+                            HorizontalAlignment="Right">
+                        <Button x:Name="cmdExtraerSeleccionados" 
+                            Style="{StaticResource ButtonRevealStyle}"
+                            Click="cmdExtraerSeleccionados_Click">
+                            <TextBlock TextAlignment="Center">Extraer Seleccionados</TextBlock>
+                        </Button>
+                        <Button x:Name="cmdExtraerTodos" 
+                            Style="{StaticResource ButtonRevealStyle}"
+                            Click="cmdExtraerTodos_Click">
+                            <TextBlock>
+                            Extraer Todos
+                            </TextBlock>
+                        </Button>
+
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+
+        <StatusBar x:Name="st" Grid.Row="3" Grid.ColumnSpan="4">
             <StatusBarItem>
-            <TextBlock x:Name="stText"></TextBlock>
+                <TextBlock x:Name="stText"></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>
