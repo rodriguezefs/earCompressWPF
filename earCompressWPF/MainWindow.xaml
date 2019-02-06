@@ -7,25 +7,19 @@
         mc:Ignorable="d"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         fw:AcrylicWindow.Enabled="True"
-        Title="earCompress" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="earCompress" Height="600" Width="800" Loaded="Window_Loaded" Padding="5" Margin="20">
 
-    <Grid >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="58*"/>
-            <ColumnDefinition Width="66*"/>
-            <ColumnDefinition Width="659*"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="155"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        
+
         <Border Grid.ColumnSpan="4"
-                Margin="10"
-                Background="{Binding Path=(fw:AccentColors.ImmersiveSystemAccentLight1Brush)}">
+                Style="{StaticResource BorderAppStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="75"/>
@@ -33,24 +27,27 @@
                     <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+
                 <Label Grid.Column="0" VerticalAlignment="Center">Archivo</Label>
+
                 <TextBox x:Name="txtNombreArchivo" 
                          Grid.Column="1" 
                          Grid.ColumnSpan="2" 
                          Style="{StaticResource TextBoxStyle}"/>
+
                 <Button x:Name="cmdAbrir" 
                         Grid.Column="3" 
                         Margin="4"
-                        Style="{StaticResource ButtonRevealStyle}"
-                        Click="AbrirArchivo_Click">_Abrir</Button>
+                        Style="{StaticResource ButtonAppStyle}"
+                        Click="AbrirArchivo_Click">_Abrir
+                </Button>
             </Grid>
         </Border>
 
-        <Border 
-            Padding="10" 
-            Margin="0.5,10,10,10"
-            Background="{Binding Path=(fw:AccentColors.ImmersiveSystemAccentLight1Brush)}"
-            Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1">
+        <Border Grid.Row="1" 
+                Grid.ColumnSpan="3" 
+                Grid.Column="1"
+                Style="{StaticResource BorderAppStyle}">
             <ListView x:Name ="lstListadeArchivos" 
                   MinHeight="200"
                   Margin="2" ItemsSource="{Binding}">
@@ -63,6 +60,7 @@
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                     </Style>
                 </ListView.Resources>
+
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Nombre" 
@@ -84,11 +82,10 @@
             </ListView>
         </Border>
 
-        <Border Grid.Row="2" Grid.ColumnSpan="4"
-                Background="{Binding Path=(fw:AccentColors.ImmersiveSystemAccentLight1Brush)}"
-                Margin="10"
-                Padding="5">
-            <Border>
+        <Border Grid.Row="2" 
+                Grid.ColumnSpan="3"
+                Grid.Column="1">
+            <Border Style="{StaticResource BorderAppStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="55"/>
@@ -105,7 +102,7 @@
                          Style="{StaticResource TextBoxStyle}"/>
                     <Button x:Name="cmdSelDestino" 
                         Grid.Column="3" 
-                        Style="{StaticResource ButtonRevealStyle}"
+                        Style="{StaticResource ButtonAppStyle}"
                         Click="cmdDestino_Click">_Destino</Button>
                     <StackPanel Grid.Row="1" 
                             Grid.ColumnSpan="4" 
@@ -113,12 +110,12 @@
                             Margin="5"
                             HorizontalAlignment="Right">
                         <Button x:Name="cmdExtraerSeleccionados" 
-                            Style="{StaticResource ButtonRevealStyle}"
+                            Style="{StaticResource ButtonAppStyle}"
                             Click="cmdExtraerSeleccionados_Click">
                             <TextBlock TextAlignment="Center">Extraer Seleccionados</TextBlock>
                         </Button>
                         <Button x:Name="cmdExtraerTodos" 
-                            Style="{StaticResource ButtonRevealStyle}"
+                            Style="{StaticResource ButtonAppStyle}"
                             Click="cmdExtraerTodos_Click">
                             <TextBlock>
                             Extraer Todos
