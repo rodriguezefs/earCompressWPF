@@ -81,6 +81,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Comandos.cs" />
     <Compile Include="Compress.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="Icons.cs" />

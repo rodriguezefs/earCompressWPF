@@ -5,12 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:earCompressWPF"
         mc:Ignorable="d"
+        xmlns:cmds="clr-namespace:earCompressWPF.Comandos"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         fw:AcrylicWindow.Enabled="True"
         Title="earCompress" Height="600" Width="800" Loaded="Window_Loaded" Padding="5" Margin="20">
 
-    <Grid>
+    <Window.CommandBindings>
+        <CommandBinding Command="cmds:Comandos.AbrirArchivo"
+                        CanExecute="CmdAbrirArchivo_CanExecute"
+                        Executed="CmdAbrirArchivo_Executed"/>
 
+        <CommandBinding Command="cmds:Comandos.SeleccionarCarpetaDestino"
+                        CanExecute="CmdSeleccionarCarpetaDestino_CanExecute"
+                        Executed="CmdSeleccionarCarpetaDestino_Executed"/>
+
+        <CommandBinding Command="cmds:Comandos.ExtraerSeleccionados"
+                        CanExecute="CmdExtraerSeleccionados_CanExecute"
+                        Executed="CmdExtraerSeleccionados_Executed"/>
+
+        <CommandBinding Command="cmds:Comandos.ExtraerTodos"
+                        CanExecute="CmdExtraerTodos_CanExecute"
+                        Executed="CmdExtraerTodos_Executed"/>
+    </Window.CommandBindings>
+    
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
@@ -28,7 +46,8 @@
                     <ColumnDefinition Width="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" VerticalAlignment="Center">Archivo</Label>
+                <Label Grid.Column="0" 
+                       VerticalAlignment="Center">Archivo</Label>
 
                 <TextBox x:Name="txtNombreArchivo" 
                          Grid.Column="1" 
@@ -36,10 +55,10 @@
                          Style="{StaticResource TextBoxStyle}"/>
 
                 <Button x:Name="cmdAbrir" 
+                        Command="cmds:Comandos.AbrirArchivo"
                         Grid.Column="3" 
                         Margin="4"
-                        Style="{StaticResource ButtonAppStyle}"
-                        Click="AbrirArchivo_Click">_Abrir
+                        Style="{StaticResource ButtonAppStyle}">_Abrir
                 </Button>
             </Grid>
         </Border>
@@ -103,7 +122,7 @@
                     <Button x:Name="cmdSelDestino" 
                         Grid.Column="3" 
                         Style="{StaticResource ButtonAppStyle}"
-                        Click="cmdDestino_Click">_Destino</Button>
+                        Command="cmds:Comandos.SeleccionarCarpetaDestino">_Destino</Button>
                     <StackPanel Grid.Row="1" 
                             Grid.ColumnSpan="4" 
                             Orientation="Horizontal"
@@ -111,12 +130,12 @@
                             HorizontalAlignment="Right">
                         <Button x:Name="cmdExtraerSeleccionados" 
                             Style="{StaticResource ButtonAppStyle}"
-                            Click="cmdExtraerSeleccionados_Click">
+                            Command="cmds:Comandos.ExtraerSeleccionados">
                             <TextBlock TextAlignment="Center">Extraer Seleccionados</TextBlock>
                         </Button>
                         <Button x:Name="cmdExtraerTodos" 
                             Style="{StaticResource ButtonAppStyle}"
-                            Click="cmdExtraerTodos_Click">
+                            Command="cmds:Comandos.ExtraerTodos">
                             <TextBlock>
                             Extraer Todos
                             </TextBlock>

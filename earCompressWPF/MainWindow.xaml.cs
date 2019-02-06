@@ -25,8 +25,51 @@ namespace earCompressWPF {
         public MainWindow() {
             InitializeComponent();
         }
+                
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            txtRutaDestino.Text = path;
+        }
 
-        private async void AbrirArchivo_Click(object sender, RoutedEventArgs e) {
+        private void StatusSet(string Msg = "") {
+            stText.Text = Msg;
+        }
+
+        private void CmdAbrirArchivo_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
+        }
+
+        private async void CmdAbrirArchivo_Executed(object sender, ExecutedRoutedEventArgs e) {
+            await AbrirArchivo();
+        }
+
+        private void CmdSeleccionarCarpetaDestino_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
+        }
+
+        private void CmdSeleccionarCarpetaDestino_Executed(object sender, ExecutedRoutedEventArgs e) {
+            SeleccionarCarpetaDestino();
+        }
+
+        private void CmdExtraerSeleccionados_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+            if(lstListadeArchivos == null) { return; }
+            e.CanExecute = lstListadeArchivos.SelectedItems.Count > 0;
+        }
+
+        private void CmdExtraerSeleccionados_Executed(object sender, ExecutedRoutedEventArgs e) {
+            ExtraerSeleccionados();
+        }
+
+        private void CmdExtraerTodos_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+            if (lstListadeArchivos == null) { return; }
+            e.CanExecute = lstListadeArchivos.Items.Count > 0;
+        }
+
+        private void CmdExtraerTodos_Executed(object sender, ExecutedRoutedEventArgs e) {
+            ExtraerTodos();
+        }
+
+        private async Task AbrirArchivo() {
             OpenFileDialog lxOFDlg = new OpenFileDialog();
 
             lxOFDlg.InitialDirectory = "C:\\";
@@ -57,7 +100,7 @@ namespace earCompressWPF {
             StatusSet();
         }
 
-        private void cmdDestino_Click(object sender, RoutedEventArgs e) {
+        private void SeleccionarCarpetaDestino() {
             WPFFolderBrowserDialog fd = new WPFFolderBrowserDialog {
                 InitialDirectory = Environment.SpecialFolder.Desktop.ToString(),
                 Title = "Seleccionar carpeta destino",
@@ -69,26 +112,22 @@ namespace earCompressWPF {
             }
         }
 
-        private void cmdExtraerSeleccionados_Click(object sender, RoutedEventArgs e) {
+        private void ExtraerSeleccionados() {
 
+            StatusSet("Extrayendo...");
             List<string> lst = new List<string>();
             foreach (InfoArchivo lxItm in lstListadeArchivos.SelectedItems) {
                 lst.Add(lxItm.Nombre);
             }
 
             Compress.ExtraerArchivosSeleccionados(txtNombreArchivo.Text, txtRutaDestino.Text, lst);
+            StatusSet();
         }
 
-        private void cmdExtraerTodos_Click(object sender, RoutedEventArgs e) {
-            Compress.ExtraerTodo(txtNombreArchivo.Text,txtRutaDestino.Text);
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            txtRutaDestino.Text = path;
-        }
-
-        private void StatusSet(string Msg = "") {
-            stText.Text = Msg;
+        private void ExtraerTodos() {
+            StatusSet("Extrayendo...");
+            Compress.ExtraerTodo(txtNombreArchivo.Text, txtRutaDestino.Text);
+            StatusSet();
         }
     }
 }
