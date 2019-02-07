@@ -4,4 +4,4 @@ git add .                         # track all files
 git commit -m "$desc"             # commit with message
 
 # push to origin
-git push origin master --repo https://rodriguezefs:2dn0GVWPIuIm@github.com/rodriguezefs/earCompressWPF.git            
+git push --repo https://rodriguezefs:2dn0GVWPIuIm@github.com/rodriguezefs/earCompressWPF.git            
