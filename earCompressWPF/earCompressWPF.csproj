@@ -121,5 +121,8 @@
   <ItemGroup>
     <Resource Include="earCompress.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\earCompress.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
