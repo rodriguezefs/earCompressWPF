@@ -69,12 +69,13 @@
                 </Border>
 
                 <Border Grid.Row="1" 
-                Grid.ColumnSpan="3" 
-                Grid.Column="1"
-                Style="{StaticResource BorderAppStyle}">
-                    <ListView x:Name ="lstListadeArchivos" 
-                  MinHeight="200"
-                  Margin="2" ItemsSource="{Binding}">
+                        Grid.ColumnSpan="3" 
+                        Grid.Column="1"
+                        Style="{StaticResource BorderAppStyle}">
+                    <ListView x:Name ="lstListadeArchivos"                   
+                              MinHeight="200"                  
+                              Margin="2" 
+                              ItemsSource="{Binding}">
 
                         <ListView.Resources>
                             <Style TargetType="ListViewItem">
@@ -159,7 +160,36 @@
             </Grid>
         </TabItem>
         <TabItem Header="Comprimir">
-            
+            <StackPanel>
+                <Border Style="{StaticResource BorderAppStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center">Destino</Label>
+                        <TextBox x:Name="txtRutaComprimir" Grid.Column="1" Grid.ColumnSpan="2" 
+                                 Style="{StaticResource TextBoxStyle}"/>
+                        <Button x:Name="cmdSelCarpetaComprimir" 
+                                Grid.Column="3" 
+                                Style="{StaticResource ButtonAppStyle}"
+                                Command="cmds:Comandos.SeleccionarCarpetaDestino">Carpeta</Button>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" 
+                        Grid.ColumnSpan="3" 
+                        Grid.Column="1"
+                        Style="{StaticResource BorderAppStyle}">
+                    <ListViewItem MinHeight="300"></ListViewItem>
+                </Border>
+            </StackPanel>
+                
         </TabItem>
     </TabControl>
 </Window>
