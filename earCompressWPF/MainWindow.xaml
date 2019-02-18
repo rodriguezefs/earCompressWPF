@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         xmlns:cmds="clr-namespace:earCompressWPF.Comandos"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True"
-        fw:PointerTracker.Enabled="True"
+        fw:AcrylicWindow.Enabled="True" fw:PointerTracker.Enabled="True" fw:AcrylicWindow.ShowTitleBar="True"
         Title="earCompress" 
         Height="600" Width="800" Loaded="Window_Loaded" Padding="5" Margin="20" Icon="img/earCompress.ico">
 
@@ -29,44 +28,49 @@
                         CanExecute="CmdExtraerTodos_CanExecute"
                         Executed="CmdExtraerTodos_Executed"/>
     </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <TabControl fw:AcrylicWindow.Enabled="True"
+                Margin="4"
+                fw:PointerTracker.Enabled="True"
+                Background="#01FFFFFF">
+            <TabItem Header="Extraer">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="155"/>
+                    </Grid.RowDefinitions>
 
-    <TabControl fw:AcrylicWindow.Enabled="True"
-                Margin="4">
-        <TabItem Header="Extraer">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="75"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="155"/>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
-
-                <Border Grid.ColumnSpan="4"
+                    <Border Grid.ColumnSpan="4"
                 Style="{StaticResource BorderAppStyle}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="75"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" 
+                            <Label Grid.Column="0" 
                        VerticalAlignment="Center">Archivo</Label>
 
-                        <TextBox x:Name="txtNombreArchivo" 
+                            <TextBox x:Name="txtNombreArchivo" 
                          Grid.Column="1" 
                          Grid.ColumnSpan="2" 
                          Style="{StaticResource TextBoxStyle}"/>
 
-                        <Button x:Name="cmdAbrir" 
+                            <Button x:Name="cmdAbrir" 
                         Command="cmds:Comandos.AbrirArchivo"
                         Grid.Column="3" 
                         Margin="4"
                         Style="{StaticResource ButtonAppStyle}">_Abrir
-                        </Button>
-                    </Grid>
-                </Border>
+                            </Button>
+                        </Grid>
+                    </Border>
 
                 <Border Grid.Row="1" 
                         Grid.ColumnSpan="3" 
@@ -77,121 +81,94 @@
                               Margin="2" 
                               ItemsSource="{Binding}">
 
-                        <ListView.Resources>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                            <Style TargetType="{x:Type GridViewColumnHeader}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                            </Style>
-                        </ListView.Resources>
+                            <ListView.Resources>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                </Style>
+                            </ListView.Resources>
 
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Nombre" 
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Nombre" 
                                     Width="Auto" 
                                     DisplayMemberBinding="{Binding Nombre}"/>
-                                <GridViewColumn Header="Tamaño" 
+                                    <GridViewColumn Header="Tamaño" 
                                     Width="100" >
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock HorizontalAlignment="Right" Text="{Binding Tamaño}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Carpeta"
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Right" Text="{Binding Tamaño}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Carpeta"
                                     Width="Auto"
                                     DisplayMemberBinding="{Binding Carpeta}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Border>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Border>
 
-                <Border Grid.Row="2" 
+                    <Border Grid.Row="2" 
                 Grid.ColumnSpan="3"
                 Grid.Column="1">
-                    <Border Style="{StaticResource BorderAppStyle}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="75"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="100"></ColumnDefinition>
-                                <ColumnDefinition Width="100"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label VerticalAlignment="Center">Destino</Label>
-                            <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" 
+                        <Border Style="{StaticResource BorderAppStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="55"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label VerticalAlignment="Center">Destino</Label>
+                                <TextBox x:Name="txtRutaDestino" Grid.Column="1" Grid.ColumnSpan="2" 
                          Style="{StaticResource TextBoxStyle}"/>
-                            <Button x:Name="cmdSelDestino" 
+                                <Button x:Name="cmdSelDestino" 
                         Grid.Column="3" 
                         Style="{StaticResource ButtonAppStyle}"
                         Command="cmds:Comandos.SeleccionarCarpetaDestino">_Destino</Button>
-                            <StackPanel Grid.Row="1" 
+                                <StackPanel Grid.Row="1" 
                             Grid.ColumnSpan="4" 
                             Orientation="Horizontal"
                             Margin="5"
                             HorizontalAlignment="Right">
-                                <Button x:Name="cmdExtraerSeleccionados" 
+                                    <Button x:Name="cmdExtraerSeleccionados" 
                             Style="{StaticResource ButtonAppStyle}"
                             Command="cmds:Comandos.ExtraerSeleccionados">
-                                    <TextBlock TextAlignment="Center">Extraer Seleccionados</TextBlock>
-                                </Button>
-                                <Button x:Name="cmdExtraerTodos" 
+                                        <TextBlock TextAlignment="Center">Extraer Seleccionados</TextBlock>
+                                    </Button>
+                                    <Button x:Name="cmdExtraerTodos" 
                             Style="{StaticResource ButtonAppStyle}"
                             Command="cmds:Comandos.ExtraerTodos">
-                                    <TextBlock>
+                                        <TextBlock>
                             Extraer Todos
-                                    </TextBlock>
-                                </Button>
+                                        </TextBlock>
+                                    </Button>
 
-                            </StackPanel>
-                        </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
                     </Border>
-                </Border>
 
-                <StatusBar x:Name="st" Grid.Row="3" Grid.ColumnSpan="4">
-                    <StatusBarItem>
-                        <TextBlock x:Name="stText"></TextBlock>
-                    </StatusBarItem>
-                </StatusBar>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Comprimir">
-            <StackPanel>
-                <Border Style="{StaticResource BorderAppStyle}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="55"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="75"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label VerticalAlignment="Center">Destino</Label>
-                        <TextBox x:Name="txtRutaComprimir" Grid.Column="1" Grid.ColumnSpan="2" 
-                                 Style="{StaticResource TextBoxStyle}"/>
-                        <Button x:Name="cmdSelCarpetaComprimir" 
-                                Grid.Column="3" 
-                                Style="{StaticResource ButtonAppStyle}"
-                                Command="cmds:Comandos.SeleccionarCarpetaDestino">Carpeta</Button>
-                    </Grid>
-                </Border>
-                <Border Grid.Row="1" 
-                        Grid.ColumnSpan="3" 
-                        Grid.Column="1"
-                        Style="{StaticResource BorderAppStyle}">
-                    <ListViewItem MinHeight="300"></ListViewItem>
-                </Border>
-            </StackPanel>
-                
-        </TabItem>
-    </TabControl>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Comprimir">
+
+            </TabItem>
+        </TabControl>
+        <StatusBar x:Name="st" Grid.Row="1">
+            <StatusBarItem>
+                <TextBlock x:Name="stText"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
 </Window>
 
 
